@@ -1,0 +1,30 @@
+package de.opensourcepress.shipservice;
+
+enum ShipType {
+  KREUZFAHRTSCHIFF = 1;
+  CONTAINERSCHIFF = 2;
+  TANKSCHIFF = 3;
+  OTHER = 4;
+}
+
+message Ship {
+	required int32 id = 1;
+	required string name = 2;
+	required ShipType type = 3;
+}
+
+message ShipRequest {
+  repeated string name = 1;
+}
+
+message ShipResponse {
+  message ShipItem {
+    required Ship ship = 1;
+  }
+  
+  repeated ShipItem results = 1;
+}
+
+service ShipService {
+  rpc getShip (ShipRequest) returns (ShipResponse);
+}
